@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %> 
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+    <div class="main-container">
+        <div class="movie-card-container">
+            <% res.forEach(element => { %>
+                <div class="movie-card">
+                    <div class="top"><img src="<%- element.path_to_img %>" alt="kep"></div>
+                    <div class="bottom">
+                        <span class="movie-name"><%- element.movie_name %></span>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>

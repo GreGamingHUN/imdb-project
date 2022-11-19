@@ -1,0 +1,25 @@
+{
+  "name": "imdb-project",
+  "version": "0.0.1",
+  "description": "imdb beadandó Adatbázisok gyakorlatra",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GreGamingHUN/imdb-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GreGamingHUN/imdb-project/issues"
+  },
+  "homepage": "https://github.com/GreGamingHUN/imdb-project#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}

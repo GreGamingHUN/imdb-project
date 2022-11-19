@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root {
+    --theme-color: rgb(255, 136, 0);
+}
+
+
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: rgb(17, 17, 17);
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-card-container {
+    margin-top: 35px;
+    width: 75%;
+    height: fit-content;
+}
+
+.movie-card {
+    background: rgb(29, 29, 29);
+    box-shadow: 1px 1px 5px rgb(0, 0, 0);
+    color: whitesmoke;
+    height: fit-content;
+    width: 200px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.movie-card .top {
+    margin: 0;
+    padding: 0;
+    height: fit-content;
+    width: fit-content;
+}
+
+.movie-card .top img {
+    width: 100%;
+}
+
+.movie-card .bottom {
+    position: relative;
+    margin-top: -4px;
+    height: 100px;
+}
+
+.movie-card .bottom .movie-name {
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
