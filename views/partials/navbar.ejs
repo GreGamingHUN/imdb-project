@@ -1,11 +1,24 @@
 <div class="navbar-container">
     <div class="logo-container">
-        <span>Nem </span><span class="logo-text">IMDb</span>
+        <a href="/"><span>Nem </span><span class="logo-text">IMDb</span></a>
     </div>
     <nav class="navbar">
         <div class="search-container">
-            <input class="search-bar" type="search" name="" id="">
-            <button class="search-button">Keresés</button>
+            <form action="search" method="post">
+                <input class="search-bar" type="search" name="input">
+                <button type="submit" class="search-button">Keresés</button>
+            </form>
         </div>
     </nav>
+    <div class="account-button-container">
+        <button class="login" onclick="showLogin()">Bejelentkezés</button>
+        <button class="register">Regisztráció</button>
+    </div>
 </div>
+<script>
+    const login = document.getElementById("login-full-container");
+
+    function showLogin() {
+        login.style.display = "initial";
+    }
+</script>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/details.css">
+</head>
+<body>
+    <%- include('../partials/login') %>
+    <%- include('../partials/navbar') %>
+    <% let director = []; %> 
+    <% cast.forEach(element => {
+        if (element.person_role === "director") {
+            director.push(element.person_name);
+        }
+    }) 
+    console.dir(director); %>
+    <div class="details-main-container">
+        <div class="details-container">
+            <div class="banner-container">
+                <img class="banner" src="<%- movie.path_to_img %> " alt="<%- movie.movie_name %>">
+            </div>
+            <div class="top-bar">
+                <div class="cover-art-container">
+                    <img class="cover-art" src="<%- movie.path_to_img %> " alt="<%- movie.movie_name %>">
+                </div>
+                <div class="title">
+                    <div class="title-text"><%- movie.movie_name %></div>
+                    <% 
+                    const now = new Date(movie.release_date) 
+                    const value = date.format(now, 'YYYY. MM. DD')
+                    %> 
+                    <div class="release-date"><%- value %></div>
+                    <div class="description"><%- movie.movie_desc %> </div>
+                    <div class="directors-container">
+                        <table>
+                            <% if (director != "") { %>
+                                <tr>
+                                    <td>
+                                        <span style="color: rgb(177, 177, 177);">Rendezte:</span>
+                                    </td>
+                                    <td>
+                                        <% director.forEach(element => { %>
+                                         <span style="margin-left: 25px;"><%- element %></span><br>
+                                        <% }) %>
+                                    </td>
+                                </tr>
+                            <% } %>
+                            <% if (movie.movie_studio) { %>
+                            <tr>
+                                <td>
+                                    <span style="color: rgb(177, 177, 177);">Stúdió:</span>
+                                </td>
+                                <td>
+                                        <span style="margin-left: 25px;"><%- movie.movie_studio %></span>
+                                    </td>
+                                </tr>
+                            <% } %> 
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="cast-container">
+                <span class="cast-title">Szereplők</span>
+                <div class="actors-container">
+                    <% cast.forEach(element => { %>
+                     <% if (element.person_role === "cast") { %>
+                        <div class="actor-container">
+                            <div class="actor-img">
+                            <% if (element.path_to_img) { %>
+                                <img width="130px" height="130px" src="<%- element.path_to_img %>" alt="">
+                            <% } else {%>
+                                <img width="130px" height="130px" src="/img/people/default.jpg" alt="">
+                            <% } %> 
+                            </div>
+                            <div class="actor-text">
+                                <span class="name"><%- element.person_name %></span><br>
+                                <span class="role"><%- element.role_as %></span>
+                            </div>
+                        </div>
+                     <% } %>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -4,6 +4,7 @@
     <%- include('../partials/head') %> 
 </head>
 <body>
+    <%- include('../partials/login') %>
     <%- include('../partials/navbar') %>
     <div class="main-container">
         <div class="movie-card-container">
@@ -12,6 +13,17 @@
                     <div class="top"><img src="<%- element.path_to_img %>" alt="kep"></div>
                     <div class="bottom">
                         <span class="movie-name"><%- element.movie_name %></span>
+                        <form method="post" action="details">
+                            <button value="<%- element.movieid %>" name="id" type="submit" class="details">Részletek</button>
+                        </form>
+                        <div class="rating-container">
+                            <% if (element.user_rating) { %>
+                                <span class="user-rating"><%- element.user_rating / 2 %> ⭐</span>
+                            <% } %>
+                            <% if (element.rotten_tomatoes) { %>
+                                <span class="rotten-tomatoes"><%- element.rotten_tomatoes %>% </span>
+                            <% } %>
+                        </div>
                     </div>
                 </div>
             <% }) %>

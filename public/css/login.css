@@ -1,0 +1,64 @@
+.login-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-container {
+    padding: 50px;
+    width: 650px;
+    height: 550px;
+    background-color: rgb(31, 31, 31);
+    border-radius: 50px;
+}
+
+.login-container form input {
+    color: black;
+}
+
+.login-container button  {
+    color: whitesmoke;
+    max-width: fit-content;
+    background: var(--theme-color);
+    border: none;
+    padding: 15px;
+    padding-inline: 25px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}
+
+.login-container button:hover {
+    transition: .1s ease-in-out;
+    filter: brightness(150%);
+}
+
+.darken {
+    z-index: 2;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    opacity: 65%;
+}
+
+#login-full-container {
+    transition: .1s ease-in-out;
+    display: none;
+}
+
+.account-button-container .register  {
+    color: whitesmoke;
+    max-width: fit-content;
+    background: var(--theme-color);
+    border: none;
+    padding: 15px;
+    padding-inline: 25px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}

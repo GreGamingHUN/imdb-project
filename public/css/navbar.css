@@ -6,6 +6,7 @@
     height: 75px;
     background: rgb(31, 31, 31);
     box-shadow: 0px 5px 15px rgb(29, 29, 29);
+    position: relative;
 }
 
 .navbar {
@@ -13,7 +14,7 @@
     position: relative;
 }
 
-.search-container {
+.search-container form {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,6 +22,8 @@
 }
 
 .search-bar {
+    padding: 15px;
+    font-size: 15px;
     color: whitesmoke;
     height: 45px;
     width: 65%;
@@ -31,7 +34,7 @@
     border-radius: 100px;
 }
 
-.search-button {
+.search-button{
     color: whitesmoke;
     width: 20%;
     max-width: 95px;
@@ -41,6 +44,12 @@
     padding-inline: 25px;
     border-radius: 100px;
     box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}
+
+.search-button:hover {
+    transition: .1s ease-in-out;
+    filter: brightness(150%);
 }
 
 .logo-container {
@@ -51,6 +60,56 @@
     left: 25px;
 }
 
+.logo-container a {
+    text-decoration: none;
+}
+
 .logo-text {
     color: var(--theme-color);
+}
+
+.account-button-container {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 25px;
+    gap: 20px;
+}
+
+.account-button-container .register  {
+    color: whitesmoke;
+    max-width: fit-content;
+    background: var(--theme-color);
+    border: none;
+    padding: 15px;
+    padding-inline: 25px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}
+
+.account-button-container .login  {
+    color: whitesmoke;
+    max-width: fit-content;
+    outline: 1px var(--theme-color) solid;
+    background: none;
+    border: none;
+    padding: 15px;
+    padding-inline: 25px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}
+
+.account-button-container .register:hover {
+    transition: .1s ease-in-out;
+    filter: brightness(150%);
+}
+
+.account-button-container .login:hover {
+    transition: .1s ease-in-out;
+    background: var(--theme-color);
 }

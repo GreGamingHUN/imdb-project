@@ -1,0 +1,22 @@
+
+<div id="login-full-container">
+    <div class="darken">
+    </div>
+    <div class="login-main-container"  onclick="exitLogin()" >
+        <div class="login-container">
+            <span style="font-size: 35px; font-weight: bold;">Bejelentkezés</span>
+            <form action="login" method="post">
+                <input type="email" name="user_email">
+                <input type="password" name="user_passwd">
+                <button type="submit">Bejelentkezés</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const full_container = document.getElementById("login-main-container");
+    
+    function exitLogin() {
+        full_container.style.display = none;
+    }
+</script>
