@@ -44,6 +44,7 @@ body {
 }
 
 .movie-card .top {
+    position: relative;
     margin: 0;
     padding: 0;
     height: fit-content;
@@ -57,10 +58,11 @@ body {
 .movie-card .bottom {
     position: relative;
     margin-top: -4px;
-    height: 160px;
+    height: 190px;
 }
 
 .movie-card .bottom .movie-name {
+    width: 70%;
     font-size: 18px;
     font-weight: bold;
     position: absolute;
@@ -81,7 +83,7 @@ body {
     padding: 15px;
     font-size: 15px;
     position: absolute;
-    top: 65px;
+    top: 85px;
     width: 100%;
     margin: 0px;
     transition: .1s ease-in-out;
@@ -90,4 +92,23 @@ body {
 .movie-card .bottom .details:hover {
     background: rgb(49, 49, 49);
     transition: .1s ease-in-out;
+}
+
+.favourite-container {
+    margin-top: 25px;
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.heart-fill:hover, .heart-fill-active:hover {
+    fill: rgb(255, 130, 130);
+}
+
+.heart-fill-active {
+    fill: red;
 }

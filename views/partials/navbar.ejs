@@ -11,14 +11,46 @@
         </div>
     </nav>
     <div class="account-button-container">
-        <button class="login" onclick="showLogin()">Bejelentkezés</button>
-        <button class="register">Regisztráció</button>
+    <% if (localStorage.getItem('loggedin') == 'true') { %>
+        <button class="loggedin">
+            <form action="logout" method="post">
+                <input type="image" src="/img/logout.svg">
+            </form>
+            <span class="welcome">Üdv,</span><br>
+            <span><%- localStorage.getItem('username') %></span>
+        </button>
+    <% } else { %>
+        <button class="login" onclick="toggleLogin()">Bejelentkezés</button>
+        <button class="register" onclick="toggleRegister()">Regisztráció</button>
+        <% } %>
     </div>
 </div>
 <script>
-    const login = document.getElementById("login-full-container");
+    let openedLogin = false;
+    let openedRegister = false;
+    const loginContainer = document.getElementById("login-main-container");
+    const registerContainer = document.getElementById("register-main-container");
 
-    function showLogin() {
-        login.style.display = "initial";
+    function toggleLogin() {
+        if (!openedLogin) {
+            if (openedRegister)
+            registerContainer.style.display = "none";
+            openedRegister = false;
+            loginContainer.style.display = "flex";
+        } else {
+            loginContainer.style.display = "none";
+        }
+        openedLogin = !openedLogin;
+    }
+
+    function toggleRegister() {
+        if (!openedRegister) {
+            loginContainer.style.display = "none";
+            registerContainer.style.display = "flex";
+            openedLogin = false;
+        } else {
+            registerContainer.style.display = "none";
+        }
+        openedRegister = !openedRegister;
     }
 </script>

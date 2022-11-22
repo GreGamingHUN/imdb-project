@@ -25,11 +25,7 @@
                 </div>
                 <div class="title">
                     <div class="title-text"><%- movie.movie_name %></div>
-                    <% 
-                    const now = new Date(movie.release_date) 
-                    const value = date.format(now, 'YYYY. MM. DD')
-                    %> 
-                    <div class="release-date"><%- value %></div>
+                    <div class="release-date"><%- movie.release_date %></div>
                     <div class="description"><%- movie.movie_desc %> </div>
                     <div class="directors-container">
                         <table>

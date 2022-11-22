@@ -1,64 +1,103 @@
-.login-main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
+#login-main-container {
+    display: none;
+    position: absolute;
+    right: 85px;
+    top: 85px;
     z-index: 3;
-    width: 100vw;
-    height: 100vh;
+    width: 300px;
+    border-radius: 25px;
+    background: rgb(37, 37, 37);
 }
 
-.login-container {
-    padding: 50px;
-    width: 650px;
-    height: 550px;
-    background-color: rgb(31, 31, 31);
-    border-radius: 50px;
+#register-main-container {
+    display: none;
+    position: absolute;
+    right: 85px;
+    top: 85px;
+    z-index: 3;
+    width: 300px;
+    border-radius: 25px;
+    background: rgb(37, 37, 37);
 }
 
-.login-container form input {
+.account-main-container form input {
     color: black;
 }
 
-.login-container button  {
-    color: whitesmoke;
-    max-width: fit-content;
-    background: var(--theme-color);
-    border: none;
-    padding: 15px;
-    padding-inline: 25px;
-    border-radius: 100px;
-    box-shadow: 0px 0px 5px rgb(31, 31, 31);
-    transition: .1s ease-in-out;
+.account-main-container form button {
+    color: black;
 }
 
-.login-container button:hover {
+.account-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    padding: 25px;
+}
+
+.account-main-container form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.account-main-container form input {
+    height: 35px;
+}
+
+.account-main-container form .input-container {
+    position: relative;
+}
+
+.account-main-container form input {
+    color: whitesmoke;
+    background: none;
+    border: 1px solid var(--theme-color);
+    border-radius: 5px;
+}
+
+.account-main-container form .input-container span {
+    transition: .1s ease-in-out;
+    color: var(--theme-color);
+    pointer-events: none;
+    position: absolute;
+    left: 5px;
+    padding-inline: 5px;
+    margin-top: 10px;
+}
+
+.account-main-container form input:focus ~ span,
+.account-main-container form input:valid ~ span {
+    transition: .1s ease-in-out;
+    transform: translateY(-20px);
+    background: var(--theme-color);
+    border-radius: 2px;
+    color: black;
+}
+
+.account-main-container form input:focus {
+    outline: none;
+}
+
+.account-main-container form button {
+        color: whitesmoke;
+        width: fit-content;
+        background: var(--theme-color);
+        border: none;
+        padding: 15px;
+        padding-inline: 25px;
+        border-radius: 100px;
+        box-shadow: 0px 0px 5px rgb(31, 31, 31);
+        transition: .1s ease-in-out;
+    
+    }
+    
+.account-main-container form button:hover {
     transition: .1s ease-in-out;
     filter: brightness(150%);
-}
-
-.darken {
-    z-index: 2;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    opacity: 65%;
-}
-
-#login-full-container {
-    transition: .1s ease-in-out;
-    display: none;
-}
-
-.account-button-container .register  {
-    color: whitesmoke;
-    max-width: fit-content;
-    background: var(--theme-color);
-    border: none;
-    padding: 15px;
-    padding-inline: 25px;
-    border-radius: 100px;
-    box-shadow: 0px 0px 5px rgb(31, 31, 31);
-    transition: .1s ease-in-out;
 }

@@ -113,3 +113,26 @@
     transition: .1s ease-in-out;
     background: var(--theme-color);
 }
+
+.loggedin {
+    position: relative;
+    padding: 5px;
+    padding-left: 25px;
+    width: 140px;
+    text-align: left;
+    background: var(--theme-color);
+    border: none;
+    border-radius: 100px;
+}
+
+.loggedin .welcome {
+    font-size: 18px;
+}
+
+.loggedin form input {
+    position: absolute;
+    right: 10px;
+    top: calc(50% - (45% / 2));
+    height: 45%;
+    fill: whitesmoke;
+}
