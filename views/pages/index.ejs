@@ -6,6 +6,9 @@
 <body>
     <%- include('../partials/login') %>
     <%- include('../partials/navbar') %>
+    <% if (alert != "") { %>
+     <script>alert("'<%- alert %>'")</script>
+    <% } %>
     <div class="main-container">
         <div class="movie-card-container">
             <% res.forEach(element => { %>

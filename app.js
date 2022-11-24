@@ -29,7 +29,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded());
 
 
-
+let alert = "";
 app.get('/', function(req, res) {
   console.log(localStorage.getItem('username'))
   console.log(localStorage.getItem('loggedin'))
@@ -38,16 +38,29 @@ app.get('/', function(req, res) {
 
     connection.query(`SELECT movieid FROM favourites WHERE username = "${localStorage.getItem('username')}"`, function(err, result2, fields) {
       console.dir(result2);
-      
       res.render('pages/index', {
         res: result,
         localStorage: localStorage,
-        res2: result2
+        res2: result2,
+        alert: alert
       });
+      alert = "";
     })
     
   })
 });
+
+app.get('/people', function(req, res) {
+  connection.query(`SELECT person_name, path_to_img FROM people`, function(err, result, fields) {
+    res.render('pages/people', {
+      people: result
+    });
+  })
+})
+
+app.get('/addperson', function(req, res) {
+  res.render('pages/addperson.ejs');
+})
 
 app.post('/search', function(req, res) {
   console.log(req.body.input)
@@ -57,7 +70,8 @@ app.post('/search', function(req, res) {
       res.render('pages/index', {
         res: result,
         localStorage: localStorage,
-        res2: result2
+        res2: result2,
+        alert: alert
       })
     })
   })
@@ -71,14 +85,26 @@ app.post('/details', function(req, res) {
     connection.query(`SELECT people.person_name, people.birth_date, people.path_to_img, roles.person_role,  roles.role_as FROM people INNER JOIN roles ON people.personid = roles.personid WHERE roles.movieid = ${result[0].movieid}`, function (err, result2, fields) {
       if (err) throw err;
       console.dir(result2);
-      res.render('pages/details', {
-        movie: result[0],
-        cast: result2,
-        date: date,
-        localStorage: localStorage
+      connection.query(`SELECT comments.username, comments.rating, comments.title, comments.content FROM comments INNER JOIN movies ON comments.movieid = movies.movieid WHERE movies.movieid = ${req.body.id}`, function(err, result3, fields) {
+        if (err) throw err;
+        res.render('pages/details', {
+          movie: result[0],
+          cast: result2,
+          comments: result3,
+          date: date,
+          localStorage: localStorage
+        })
       })
     })
 
+  })
+})
+
+app.post('/addcomment', function(req, res) {
+  connection.query(`INSERT INTO comments (movieid, username, rating, title, content) VALUES (${req.body.movieid}, "${localStorage.getItem('username')}", ${req.body.rating}, "${req.body.title}", "${req.body.comment}")`, function(err, result, fields) {
+    if (err) throw err;
+    alert = "Sikeres véleményhozzáadás";
+    res.redirect("/");
   })
 })
 

@@ -77,6 +77,53 @@
                     <% }) %>
                 </div>
             </div>
+            <% if (localStorage.getItem("loggedin") == "true") { %>
+                <div class="write-comment-container">
+                    <span>Írj Véleményt!</span>
+                    <form action="addcomment" method="post">
+                        <input type="text" name="title" placeholder="Adj címet a hozzászólásodnak">
+                        <textarea name="comment" placeholder="Írd ide a véleményed!"></textarea>
+                        <div class="rating-button-container">
+                            <select name="rating">
+                                <option value="10">5    ⭐</option>
+                                <option value="9">4,5   ⭐</option>
+                                <option value="8">4     ⭐</option>
+                                <option value="7">3,5   ⭐</option>
+                                <option value="6">3     ⭐</option>
+                                <option value="5">2,5   ⭐</option>
+                                <option value="4">2     ⭐</option>
+                                <option value="3">1,5   ⭐</option>
+                                <option value="2">1     ⭐</option>
+                                <option value="1">0,5   ⭐</option>
+                            </select>
+                            <button name="movieid" value="<%- movie.movieid %> "type="submit">Vélemény hozzáadása</button>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
+            <div class="reviews-main-container">
+                <span class="reviews-title">Vélemények</span>
+                <% comments.forEach(element => { %>
+                    <div class="reviews-container">
+                        <div class="review-container">
+                            <div class="profile-pic-container">
+                                <img width="100px" height="100px" src="/img/people/default.jpg" class="profile-pic">
+                                <span>
+                                    <%- element.username %> 
+                                </span>
+                            </div>
+                            <div class="comment-container">
+                                <div class="title-container">
+                                    <span><%- element.rating / 2 %> ⭐</span><br>
+                                    <span><%- element.title %></span>
+                                </div>
+                                <div class="content-container">
+                                    <%- element.content %>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
         </div>
     </div>
 </body>

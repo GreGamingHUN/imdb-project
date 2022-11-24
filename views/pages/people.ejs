@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/people.css">
+</head>
+<body>
+    <%- include('../partials/login') %>
+    <%- include('../partials/navbar') %>
+    <div class="people-container">
+        <% people.forEach(element => { %>
+            <div class="person-container">
+                <% if (element.path_to_img) { %>
+                    <img src="<%- element.path_to_img %> " alt="profilepic">
+                <% }  else {%>
+                    <img src="/img/people/default.jpg" alt="profilepic">
+                <% } %>
+                <span><%- element.person_name %> </span>
+            </div>
+        <% }) %>
+        <div class="person-container" id="addperson">
+            <a href="/addperson"><img src="/img/people/default.jpg" alt="profilepic"></a>
+            <span>Új ember hozzáadása</span>
+        </div>
+    </div>
+</body>
+</html>

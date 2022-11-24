@@ -1,3 +1,7 @@
+textarea {
+    resize: none;
+}
+
 .details-main-container {
     width: 100%;
     height: fit-content;
@@ -124,4 +128,127 @@
 .directors-container {
     margin-top: 25px;
     line-height: 35px;
+}
+
+.reviews-title {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.reviews-main-container {
+    width: calc(100% - 90px);
+    padding: 45px;
+}
+
+.profile-pic-container {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.reviews-container {
+    margin-top: 35px;
+    padding-block: 35px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.profile-pic-container img {
+    border-radius: 1000px;
+}
+
+.comment-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.review-container {
+    width: 100%;
+    display: flex;
+    gap: 35px;
+    height: fit-content;
+}
+
+.comment-container .title-container span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.content-container {
+    margin-top: 15px;
+    width: 100%;
+}
+
+
+.comment-container .title-container {
+    line-height: 27px;
+}
+
+.write-comment-container span {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.write-comment-container {
+    position: relative;
+    width: calc(100% - 90px);
+    padding: 45px;
+}
+
+.write-comment-container textarea {
+    width: calc(100% - 50px);
+    height: 350px;
+    background: rgb(24, 24, 24);
+    border: none;
+    border-radius: 25px;
+    padding: 25px;
+}
+.write-comment-container input {
+    margin-top: 25px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    width: calc(100% - 50px);
+    height: 10px;
+    background: rgb(24, 24, 24);
+    border: none;
+    border-radius: 25px;
+    padding: 25px;
+}
+
+.write-comment-container select {
+    margin-top: 15px;
+    background: rgb(24, 24, 24);
+    border: none;
+    padding: 15px;
+    border-radius: 25px;
+
+}
+
+.write-comment-container button{
+    color: whitesmoke;
+    width: fit-content;
+    background: var(--theme-color);
+    margin-left: 15px;
+    border: none;
+    padding: 15px;
+    padding-inline: 25px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}
+
+.write-comment-container button:hover {
+    transition: .1s ease-in-out;
+    filter: brightness(150%);
+}
+
+.rating-button-container {
+    padding-right: 35px;
+    position: absolute;
+    right: 15px;
 }
