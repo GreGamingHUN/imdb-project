@@ -4,7 +4,6 @@ var mysql = require('mysql');
 const date = require('date-and-time');
 const crypto = require('crypto');
 const upload = require('express-fileupload');
-const { connect } = require('http2');
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
