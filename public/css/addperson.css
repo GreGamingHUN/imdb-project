@@ -1,0 +1,86 @@
+.addperson-main-container {
+    width: 100vw;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addperson-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    padding: 60px;
+    width: fit-content;
+    height: 300px;
+    background: rgb(31, 31, 31);
+    border-radius: 25px;
+}
+
+.addperson-container img {
+    width: 130px;
+    height: 130px;
+    border-radius: 1000px;
+}
+
+.addperson-form-container form .input-container span {
+    transition: .1s ease-in-out;
+    color: var(--theme-color);
+    pointer-events: none;
+    position: absolute;
+    left: 5px;
+    padding-inline: 5px;
+    margin-top: 10px;
+}
+
+.addperson-form-container form input:focus ~ span,
+.addperson-form-container form input:valid ~ span {
+    transition: .1s ease-in-out;
+    transform: translateY(-20px);
+    background: var(--theme-color);
+    border-radius: 2px;
+    color: black;
+}
+
+.addperson-form-container form input {
+    height: 35px;
+    width: 180px;
+}
+
+.addperson-form-container form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.addperson-form-container form .input-container {
+    position: relative;
+}
+
+.addperson-form-container form input {
+    color: whitesmoke;
+    background: none;
+    border: 1px solid var(--theme-color);
+    border-radius: 5px;
+}
+
+.addperson-form-container form button {
+    color: whitesmoke;
+    width: fit-content;
+    background: var(--theme-color);
+    border: none;
+    padding: 15px;
+    padding-inline: 25px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}
+
+.addperson-form-container form button:hover {
+    transition: .1s ease-in-out;
+    filter: brightness(150%);
+}

@@ -2,12 +2,29 @@
 <html lang="en">
 <head>
     <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/addperson.css">
 </head>
 <body>
     <%- include('../partials/login') %>
     <%- include('../partials/navbar') %>
     <div class="addperson-main-container">
-        
+        <div class="addperson-container">
+            <div class="addperson-form-container">
+                <form action="createperson" method="post" enctype="multipart/form-data">
+                    <img src="/img/people/default.jpg" alt="">
+                    <input type="file" name="file">
+                    <div class="input-container">
+                        <input type="text" name="person_name" required>
+                        <span>Személy neve</span>
+                    </div>
+                    <div class="input-container">
+                        <input type="date" name="birth_date">
+                        <span>Születési Dátum</span>
+                    </div>
+                    <button type="submit">Személy hozzáadása</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

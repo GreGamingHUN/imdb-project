@@ -1,16 +1,18 @@
 var express = require('express');
 var app = express();
-const router = express.Router()
 var mysql = require('mysql');
 const date = require('date-and-time');
 const crypto = require('crypto');
-const { localsName } = require('ejs');
-const { Console } = require('console');
+const upload = require('express-fileupload');
+const { connect } = require('http2');
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
 }
+
+// enable files upload
+app.use(upload());
 
 var connection = mysql.createConnection(
   {
@@ -60,6 +62,20 @@ app.get('/people', function(req, res) {
 
 app.get('/addperson', function(req, res) {
   res.render('pages/addperson.ejs');
+})
+
+app.post('/createperson', function(req, res) {
+  console.log(req.files);
+  console.log(req.body.birth_date);
+  connection.query(`INSERT INTO people (person_name${req.body.birth_date != "" ? ", birth_date" : ""}${req.files != undefined ? ", path_to_img" : ""}) VALUES ("${req.body.person_name}"${req.body.birth_date != "" ? ", " + '"' + req.body.birth_date + '"' : ""}${req.files != undefined ? ", " + '"/img/people/' + req.files.file.name + '"' : ""})`, function(err, result, fields) {
+    if (err) throw err;
+    if (req.files) {
+      req.files.file.mv("./public/img/people/" + req.files.file.name, function(err) {
+        if (err) throw err;
+      });
+    }
+  })
+  res.redirect('/people');
 })
 
 app.post('/search', function(req, res) {
