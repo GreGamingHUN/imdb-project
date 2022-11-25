@@ -54,7 +54,8 @@ app.get('/', function(req, res) {
 app.get('/people', function(req, res) {
   connection.query(`SELECT person_name, path_to_img FROM people`, function(err, result, fields) {
     res.render('pages/people', {
-      people: result
+      people: result,
+      localStorage: localStorage
     });
   })
 })

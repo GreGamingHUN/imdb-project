@@ -18,10 +18,12 @@
                 <span><%- element.person_name %> </span>
             </div>
         <% }) %>
-        <div class="person-container" id="addperson">
-            <a href="/addperson"><img src="/img/people/default.jpg" alt="profilepic"></a>
-            <span>Új ember hozzáadása</span>
-        </div>
+        <% if (localStorage.getItem("loggedin") == "true") { %>
+            <div class="person-container" id="addperson">
+                <a href="/addperson"><img src="/img/people/default.jpg" alt="profilepic"></a>
+                <span>Új ember hozzáadása</span>
+            </div>
+        <% } %>
     </div>
 </body>
 </html>
