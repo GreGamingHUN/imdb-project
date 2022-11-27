@@ -36,23 +36,52 @@ app.get('/', function(req, res) {
   console.log(localStorage.getItem('loggedin'))
   connection.query('SELECT movies.*, ratings.user_rating, ratings.rotten_tomatoes FROM movies LEFT JOIN ratings ON ratings.movieid = movies.movieid ORDER BY movies.movie_name', function(err, result, fields) {
     if (err) throw err;
-
-    connection.query(`SELECT movieid FROM favourites WHERE username = "${localStorage.getItem('username')}"`, function(err, result2, fields) {
-      console.dir(result2);
+    if (localStorage.getItem('loggedin') == "true") {
+      connection.query(`SELECT movieid FROM favourites WHERE username = "${localStorage.getItem('username')}"`, function(err, result2, fields) {
+        console.dir(result2);
+        res.render('pages/index', {
+          res: result,
+          localStorage: localStorage,
+          res2: result2,
+          alert: alert
+        });
+        alert = "";
+      })
+    } else {
       res.render('pages/index', {
         res: result,
         localStorage: localStorage,
-        res2: result2,
+        res2: undefined,
         alert: alert
       });
       alert = "";
-    })
+    }
     
   })
 });
 
+app.get('/addmovie', function(req, res) {
+  connection.query('SELECT * FROM people ORDER BY person_name', function(err, result, fields) {
+    res.render('pages/addmovie.ejs', {
+      people: result
+    });
+  })
+})
+
+app.post('/createmovie', function(req, res) {
+  console.log(req.body.movie_name + ", " + req.body.movie_studio + ", " + req.body.release_date + ", " + req.body.director + ", " + req.body.details);
+  connection.query(`INSERT INTO movies (movie_name, release_date, movie_studio${req.body.details != "" ? ", movie_desc" : ""}, path_to_img) VALUES ("${req.body.movie_name}", ${req.body.release_date}, "${req.body.movie_studio}"${req.body.details != "" ? ', "' + req.body.movie_details + '"': ""}${req.files != undefined ? ", " + '"/img/cover/' + req.files.file.name + '"' :", " + '"/img/cover/default.jpg"'})`, function(err, result, fields) {
+    if (err) throw err;
+    connection.query(`INSERT INTO roles (personid, movieid, person_role) VALUES (${req.body.director}, (SELECT movieid FROM movies WHERE movie_name = "${req.body.movie_name}" ORDER BY movieid DESC LIMIT 1), 'director')`, function(err2, result2, fields) {
+      if (err2) throw err2;
+      res.redirect('/');
+      alert = req.body.movie_name + " sikeresen hozzáadva az adatbázishoz!";
+    })
+  })
+})
+
 app.get('/people', function(req, res) {
-  connection.query(`SELECT person_name, path_to_img FROM people`, function(err, result, fields) {
+  connection.query(`SELECT personid, person_name, path_to_img FROM people ORDER BY person_name`, function(err, result, fields) {
     res.render('pages/people', {
       people: result,
       localStorage: localStorage
@@ -76,6 +105,14 @@ app.post('/createperson', function(req, res) {
     }
   })
   res.redirect('/people');
+})
+
+app.post('/deleteperson', function(req, res) {
+  connection.query(`DELETE FROM people WHERE personid = ${req.body.personid}`, function(err, result, fields) {
+    if (err) throw err;
+    console.log("Person deleted");
+    res.redirect('/people');
+  })
 })
 
 app.post('/search', function(req, res) {
@@ -130,6 +167,7 @@ app.post('/favourite', function(req, res) {
   } else {
     let username = localStorage.getItem('username')
     connection.query(`SELECT movieid FROM favourites WHERE username = "${username}"`, function(err, result, fields) {
+      if (err) throw err;
       let favouriteFound = false;
       if (result[0]) {
         console.dir(result)
@@ -162,7 +200,7 @@ app.post('/favourite', function(req, res) {
 
 
 app.post('/login', function(req, res) {
-  if (localStorage.getItem('loggedin') == "false") {
+  if (localStorage.getItem('loggedin') == "false" || localStorage.getItem('loggedin') == null) {
     let passwd = crypto.createHash('sha256').update(req.body.passwd).digest('hex');
     connection.query(`SELECT passwd FROM accounts WHERE username = '${req.body.username}'`, function(err, result , fields) {
       if (err) throw err;

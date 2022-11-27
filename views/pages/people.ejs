@@ -11,11 +11,25 @@
         <% people.forEach(element => { %>
             <div class="person-container">
                 <% if (element.path_to_img) { %>
-                    <img src="<%- element.path_to_img %> " alt="profilepic">
+                    <% if (localStorage.getItem("loggedin") == "true") { %>
+                        <form action="deleteperson" method="post">
+                            <input name="personid" value="<%- element.personid %>" style="display: none;">
+                            <input type="image" src="<%- element.path_to_img %>" class="delete-person img">
+                        </form>
+                    <% } else { %>
+                        <img src="<%- element.path_to_img %> " alt="profilepic">
+                    <% } %>
                 <% }  else {%>
-                    <img src="/img/people/default.jpg" alt="profilepic">
+                    <% if (localStorage.getItem("loggedin") == "true") { %>
+                        <form action="deleteperson" method="post">
+                            <input name="personid" value="<%- element.personid %>" style="display: none;">
+                            <input type="image" src="/img/people/default.jpg" class="delete-person img">
+                        </form>
+                    <% } else { %>
+                        <img src="/img/people/default.jpg" alt="profilepic">
+                    <% } %>
                 <% } %>
-                <span><%- element.person_name %> </span>
+                <span><%- element.person_name %></span>
             </div>
         <% }) %>
         <% if (localStorage.getItem("loggedin") == "true") { %>

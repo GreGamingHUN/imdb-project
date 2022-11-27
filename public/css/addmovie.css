@@ -1,0 +1,91 @@
+.addmovie-main-container {
+    width: 100vw;
+    height: fit-content;
+    margin-top: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addmovie-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    padding: 60px;
+    width: 80%;
+    height: fit-content;
+    background: rgb(31, 31, 31);
+    border-radius: 25px;
+}
+
+.addmovie-container img {
+    width: 130px;
+    border-radius: 25px;
+}
+
+.addmovie-form-container form .input-container span {
+    transition: .1s ease-in-out;
+    color: var(--theme-color);
+    pointer-events: none;
+    position: absolute;
+    left: 5px;
+    padding-inline: 5px;
+    margin-top: 10px;
+}
+
+.addmovie-form-container form input:focus ~ span,
+.addmovie-form-container form input:valid ~ span,
+.addmovie-form-container form select ~ span,
+.addmovie-form-container form textarea ~ span {
+    transition: .1s ease-in-out;
+    transform: translateY(-20px);
+    background: var(--theme-color);
+    border-radius: 2px;
+    color: black;
+}
+
+.addmovie-form-container form input,
+.addmovie-form-container form select {
+    height: 35px;
+    width: 180px;
+}
+
+.addmovie-form-container form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.addmovie-form-container form .input-container {
+    position: relative;
+}
+
+.addmovie-form-container form input,
+.addmovie-form-container form select,
+.addmovie-container form textarea {
+    color: whitesmoke;
+    background: none;
+    border: 1px solid var(--theme-color);
+    border-radius: 5px;
+}
+
+.addmovie-form-container form button {
+    color: whitesmoke;
+    width: fit-content;
+    background: var(--theme-color);
+    border: none;
+    padding: 15px;
+    padding-inline: 25px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}
+
+.addmovie-form-container form button:hover {
+    transition: .1s ease-in-out;
+    filter: brightness(150%);
+}

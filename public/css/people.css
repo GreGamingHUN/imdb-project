@@ -17,7 +17,7 @@
     border-radius: 25px;
 }
 
-.person-container img {
+.person-container img, .person-container form .img{
     width: 130px;
     height: 130px;
     border-radius: 1000px;
@@ -33,4 +33,9 @@
 
 #addperson img:hover {
     filter: brightness(30%);
+}
+
+.delete-person:hover {
+    filter: invert(22%) sepia(99%) saturate(7425%) hue-rotate(358deg) brightness(106%) contrast(116%);
+    opacity: .3;
 }

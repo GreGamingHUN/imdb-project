@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/addmovie.css">
+</head>
+<body>
+    <%- include('../partials/login') %>
+    <%- include('../partials/navbar') %>
+    <div class="addmovie-main-container">
+        <div class="addmovie-container">
+            <div class="addmovie-form-container">
+                <form action="createmovie" method="post" enctype="multipart/form-data">
+                    <img src="/img/cover/addnew.jpg" alt="">
+                    <input type="file" name="file">
+                    <div class="input-container">
+                        <input type="text" name="movie_name" required>
+                        <span>Film címe</span>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" name="movie_studio" required>
+                        <span>Film stúdió</span>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" name="release_date" required>
+                        <span>Megjenelési év</span>
+                    </div>
+                    <div class="input-container">
+                        <select name="director" required>
+                            <option value="">Válassz...</option>
+                            <% people.forEach(element => {%>
+                             <option value="<%- element.personid %>"><%- element.person_name %> </option>
+                            <% }) %>
+                        </select>
+                        <span style="color: black;">Rendező</span>
+                    </div>
+                    <div class="input-container">
+                        <textarea name="details" style="width: 60vw; height: 450px;"></textarea>
+                        <span style="color: black;">Leírás</span>
+                    </div>
+                    <button type="submit">Személy hozzáadása</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
