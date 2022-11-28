@@ -7,37 +7,45 @@
 <body>
     <%- include('../partials/login') %>
     <%- include('../partials/navbar') %>
-    <div class="people-container">
-        <% people.forEach(element => { %>
-            <div class="person-container">
-                <% if (element.path_to_img) { %>
-                    <% if (localStorage.getItem("loggedin") == "true") { %>
-                        <form action="deleteperson" method="post">
-                            <input name="personid" value="<%- element.personid %>" style="display: none;">
-                            <input type="image" src="<%- element.path_to_img %>" class="delete-person img">
-                        </form>
-                    <% } else { %>
-                        <img src="<%- element.path_to_img %> " alt="profilepic">
+    <div class="people-main-container">
+        <div class="top-row-container">
+            <span style="font-size: 35px; font-weight:bold;">Emberek</span>
+            <a href="/people_cast"><button>Szereplők</button></a>
+            <a href="/people_directors"><button>Rendezők</button></a>
+            <span>Emberek száma: <%- count %> </span>
+        </div>
+        <div class="people-container">
+            <% people.forEach(element => { %>
+                <div class="person-container">
+                    <% if (element.path_to_img) { %>
+                        <% if (localStorage.getItem("loggedin") == "true") { %>
+                            <form action="deleteperson" method="post">
+                                <input name="personid" value="<%- element.personid %>" style="display: none;">
+                                <input type="image" src="<%- element.path_to_img %>" class="delete-person img">
+                            </form>
+                        <% } else { %>
+                            <img src="<%- element.path_to_img %> " alt="profilepic">
+                        <% } %>
+                    <% }  else {%>
+                        <% if (localStorage.getItem("loggedin") == "true") { %>
+                            <form action="deleteperson" method="post">
+                                <input name="personid" value="<%- element.personid %>" style="display: none;">
+                                <input type="image" src="/img/people/default.jpg" class="delete-person img">
+                            </form>
+                        <% } else { %>
+                            <img src="/img/people/default.jpg" alt="profilepic">
+                        <% } %>
                     <% } %>
-                <% }  else {%>
-                    <% if (localStorage.getItem("loggedin") == "true") { %>
-                        <form action="deleteperson" method="post">
-                            <input name="personid" value="<%- element.personid %>" style="display: none;">
-                            <input type="image" src="/img/people/default.jpg" class="delete-person img">
-                        </form>
-                    <% } else { %>
-                        <img src="/img/people/default.jpg" alt="profilepic">
-                    <% } %>
-                <% } %>
-                <span><%- element.person_name %></span>
-            </div>
-        <% }) %>
-        <% if (localStorage.getItem("loggedin") == "true") { %>
-            <div class="person-container" id="addperson">
-                <a href="/addperson"><img src="/img/people/default.jpg" alt="profilepic"></a>
-                <span>Új ember hozzáadása</span>
-            </div>
-        <% } %>
+                    <span><%- element.person_name %></span>
+                </div>
+            <% }) %>
+            <% if (localStorage.getItem("loggedin") == "true") { %>
+                <div class="person-container" id="addperson">
+                    <a href="/addperson"><img src="/img/people/default.jpg" alt="profilepic"></a>
+                    <span>Új ember hozzáadása</span>
+                </div>
+            <% } %>
+        </div>
     </div>
 </body>
 </html>

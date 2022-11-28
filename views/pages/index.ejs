@@ -57,6 +57,11 @@
                                         <button value="<%- element.movieid %>" name="id" type="submit" class="details">Részletek</button>
                                     </form>
                                     <div class="rating-container">
+                                        <% if (localStorage.getItem("loggedin") == "true") { %>
+                                            <form action="deletemovie" method="post" style="position: absolute; right: 125px; bottom: 0px">
+                                                <button class="delete-button" type="submit" name="movieid" value="<%- element.movieid %>">Törlés</button>
+                                            </form>
+                                        <% }%>
                                         <% if (element.user_rating) { %>
                                             <span class="user-rating"><%- element.user_rating / 2 %> ⭐</span>
                                             <% } %>

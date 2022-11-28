@@ -4,6 +4,7 @@ var mysql = require('mysql');
 const date = require('date-and-time');
 const crypto = require('crypto');
 const upload = require('express-fileupload');
+const { Http2ServerRequest } = require('http2');
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
@@ -70,8 +71,13 @@ app.get('/addmovie', function(req, res) {
 
 app.post('/createmovie', function(req, res) {
   console.log(req.body.movie_name + ", " + req.body.movie_studio + ", " + req.body.release_date + ", " + req.body.director + ", " + req.body.details);
-  connection.query(`INSERT INTO movies (movie_name, release_date, movie_studio${req.body.details != "" ? ", movie_desc" : ""}, path_to_img) VALUES ("${req.body.movie_name}", ${req.body.release_date}, "${req.body.movie_studio}"${req.body.details != "" ? ', "' + req.body.movie_details + '"': ""}${req.files != undefined ? ", " + '"/img/cover/' + req.files.file.name + '"' :", " + '"/img/cover/default.jpg"'})`, function(err, result, fields) {
+  connection.query(`INSERT INTO movies (movie_name, release_date, movie_studio, movie_desc, path_to_img) VALUES ("${req.body.movie_name}", ${req.body.release_date}, "${req.body.movie_studio}"${req.body.details != undefined ? ', "' + req.body.details + '"': ""}${req.files != null ? ", " + '"/img/cover/' + req.files.file.name + '"' :", " + '"/img/cover/default.jpg"'})`, function(err, result, fields) {
     if (err) throw err;
+    if (req.files) {
+      req.files.file.mv("./public/img/cover/" + req.files.file.name, function(err) {
+        if (err) throw err;
+      });
+    }
     connection.query(`INSERT INTO roles (personid, movieid, person_role) VALUES (${req.body.director}, (SELECT movieid FROM movies WHERE movie_name = "${req.body.movie_name}" ORDER BY movieid DESC LIMIT 1), 'director')`, function(err2, result2, fields) {
       if (err2) throw err2;
       res.redirect('/');
@@ -80,12 +86,52 @@ app.post('/createmovie', function(req, res) {
   })
 })
 
+app.post('/deletemovie', function(req, res) {
+  console.log(req.body.movieid);
+  connection.query(`DELETE FROM movies WHERE movieid = ${req.body.movieid}`, function(err, result, fields) {
+    if (err) throw err;
+    alert = "Film sikeresen törölve!";
+    res.redirect('/');
+  })
+})
+
 app.get('/people', function(req, res) {
   connection.query(`SELECT personid, person_name, path_to_img FROM people ORDER BY person_name`, function(err, result, fields) {
-    res.render('pages/people', {
-      people: result,
-      localStorage: localStorage
-    });
+    if (err) throw err;
+    connection.query('SELECT Count(people.personid) AS count FROM people INNER JOIN roles ON people.personid = roles.personid', function(err2, result2, fields) {
+      if (err2) throw err2;
+      console.log(result2)
+      res.render('pages/people', {
+        count: result2[0].count,
+        people: result,
+        localStorage: localStorage
+      })
+    })
+  })
+})
+
+app.get('/people_cast', function(req, res) {
+  connection.query('SELECT people.personid, people.person_name, people.path_to_img FROM people INNER JOIN roles ON people.personid = roles.personid WHERE roles.person_role = "cast" GROUP BY people.personid ORDER BY people.person_name', function(err, result, fields) {
+    connection.query('SELECT Count(people.personid) AS count FROM people INNER JOIN roles ON people.personid = roles.personid WHERE roles.person_role = "cast"', function(err2, result2, fields) {
+      res.render('pages/people', {
+        count: result2[0].count,
+        people: result,
+        localStorage: localStorage
+      })
+    })
+  })
+})
+
+app.get('/people_directors', function(req, res) {
+  connection.query('SELECT people.personid, people.person_name, people.path_to_img FROM people INNER JOIN roles ON people.personid = roles.personid WHERE roles.person_role = "director" GROUP BY people.personid ORDER BY people.person_name', function(err, result, fields) {
+    connection.query("SELECT Count(distinct people.personid) AS count FROM people INNER JOIN roles ON people.personid = roles.personid WHERE roles.person_role = 'director'", function(err2, result2, fields) {
+      console.log(result2[0].count)
+      res.render('pages/people', {
+        count: result2[0].count,
+        people: result,
+        localStorage: localStorage
+      })
+    })
   })
 })
 
@@ -140,17 +186,44 @@ app.post('/details', function(req, res) {
       console.dir(result2);
       connection.query(`SELECT comments.username, comments.rating, comments.title, comments.content FROM comments INNER JOIN movies ON comments.movieid = movies.movieid WHERE movies.movieid = ${req.body.id}`, function(err, result3, fields) {
         if (err) throw err;
-        res.render('pages/details', {
-          movie: result[0],
-          cast: result2,
-          comments: result3,
-          date: date,
-          localStorage: localStorage
+        connection.query('SELECT personid, person_name FROM people ORDER BY person_name', function(err, result4, fields) {
+          res.render('pages/details', {
+            movie: result[0],
+            cast: result2,
+            comments: result3,
+            people: result4,
+            date: date,
+            localStorage: localStorage
+          })
         })
+
       })
     })
 
   })
+})
+
+app.post('/editmovie', function(req, res) {
+  connection.query('SELECT personid, person_name FROM people ORDER BY person_name', function(err, result, fields) {
+    res.render('pages/editmovie.ejs', {
+      people: result,
+      movieid: req.body.movieid
+    });
+  })
+})
+
+app.post('/editmoviedata', function(req, res) {
+  console.log(req.body.movieid)
+  connection.query(`UPDATE movies SET movie_name = "${req.body.movie_name}, release_date = ${req.body.release_date}, movie_studio = "${req.body.movie_studio}", movie_desc = "${req.body.movie_desc}" WHERE movieid = ${req.body.movieid}`, function(err, result, fields) {
+    alert = "Film sikeresen szerkesztve!";
+    res.redirect('/');
+  })
+})
+
+app.post('/addpersontomovie', function(req, res) {
+  connection.query(`INSERT INTO roles (personid, movieid, person_role, role_as) VALUES (${req.body.person}, ${req.body.movieid}, "cast", "${req.body.role_as}")`)
+  alert = "Sikeres hozzáadás!";
+  res.redirect('/');
 })
 
 app.post('/addcomment', function(req, res) {

@@ -1,0 +1,35 @@
+<div class="addcast-main-container" id="addcast-main-container">
+    <div class="darken"></div>
+    <div class="addcast-container">
+        <div class="addcast-form-container">
+            <form action="addpersontomovie" method="post" enctype="multipart/form-data">
+                <div class="input-container">
+                    <select name="person" required>
+                        <option disabled selected>Válassz...</option>
+                        <% people.forEach(element => {%>
+                            <option value="<%- element.personid %>"><%- element.person_name %> </option>
+                            <% }) %>
+                        </select>
+                        <span style="color: black;">Személy</span>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="role_as" required>
+                    <span>Kit játszik?</span>
+                </div>
+                <button type="submit" name="movieid" value="<%- movie.movieid %>">Személy hozzáadása</button>
+            </form>
+        </div>
+        <button onclick="toggleAddCast()">Mégsem</button>
+    </div>
+</div>
+
+<script>
+    function toggleAddCast() {
+        const container = document.getElementById('addcast-main-container');
+        if (container.style.display == "none") {
+            container.style.display = "flex";
+        } else {
+            container.style.display = "none";
+        }
+    }
+</script>

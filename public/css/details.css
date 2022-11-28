@@ -229,7 +229,7 @@ textarea {
 
 }
 
-.write-comment-container button{
+.write-comment-container button, .edit-button {
     color: whitesmoke;
     width: fit-content;
     background: var(--theme-color);
@@ -242,7 +242,11 @@ textarea {
     transition: .1s ease-in-out;
 }
 
-.write-comment-container button:hover {
+.edit-button {
+    margin: 15px;
+}
+
+.write-comment-container button:hover, .edit-button:hover {
     transition: .1s ease-in-out;
     filter: brightness(150%);
 }

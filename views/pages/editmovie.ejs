@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/editmovie.css">
+</head>
+<body>
+    <%- include('../partials/login') %>
+    <%- include('../partials/navbar') %>
+    <div class="editmovie-main-container">
+        <div class="editmovie-container">
+            <span class="title">Film szerkesztése</span>
+            <div class="form-container">
+                <form action="editmoviedata" method="post">
+                    <div class="input-container">
+                        <input type="text" name="movie_name" required>
+                    </div>
+                    <div class="input-container">
+                        <input type="file" name="file">
+                    </div>
+                    <div class="input-container">
+                        <input type="number" name="release_date" required>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" name="movie_studio" required>
+                    </div>
+                    <div class="input-container">
+                        <textarea name="movie_desc"></textarea>
+                    </div>
+                    <div class="input-container">
+                        <select name="director">
+                            <% people.forEach(person => { %>
+                             <option value="<%- person.personid %>"><%- person.person_name %> </option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <button type="submit" name="movieid" value="<%- movieid %> ">Szerkesztés</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

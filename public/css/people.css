@@ -39,3 +39,34 @@
     filter: invert(22%) sepia(99%) saturate(7425%) hue-rotate(358deg) brightness(106%) contrast(116%);
     opacity: .3;
 }
+
+.people-main-container {
+    margin-top: 35px;
+}
+
+.people-main-container .top-row-container {
+    padding: 25px;
+    padding-left: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 45px;
+}
+
+.top-row-container button  {
+    color: whitesmoke;
+    max-width: fit-content;
+    outline: 1px var(--theme-color) solid;
+    background: none;
+    border: none;
+    padding: 15px;
+    padding-inline: 25px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 5px rgb(31, 31, 31);
+    transition: .1s ease-in-out;
+}
+
+.top-row-container button:hover {
+    transition: .1s ease-in-out;
+    background: var(--theme-color);
+}

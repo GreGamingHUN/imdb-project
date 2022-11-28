@@ -5,17 +5,16 @@ CREATE TABLE IF NOT EXISTS accounts (
     email     varchar(50) NOT NULL,
     username  varchar(50) NOT NULL,
     passwd    varchar(500) NOT NULL,
-    full_name varchar(50),
     PRIMARY KEY (username, email)
 ) ENGINE=InnoDB;
 
 INSERT INTO `accounts` (email, username , passwd, full_name) VALUES
-	('email@g.com', 'Bél@', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL),
-	('isfekete12@gmail.com', 'Horusz_', 'c38777d1619a83b0ee9e6e23868bb47b29f81875090a0b5d4e607263df35fec1', NULL),
-	('asd', 'kecske', '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6', NULL),
-	('prager.gero@', 'kecske12345', '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6', NULL),
-	('asdasdasd', 'kecske2', '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6', NULL),
-	('kurunczinandi@gmail.com', 'Nandee', '5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8', NULL);
+	('email@g.com', 'Bél@', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'),
+	('isfekete12@gmail.com', 'Horusz_', 'c38777d1619a83b0ee9e6e23868bb47b29f81875090a0b5d4e607263df35fec1'),
+	('asd', 'kecske', '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6'),
+	('prager.gero@', 'kecske12345', '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6'),
+	('asdasdasd', 'kecske2', '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6'),
+	('kurunczinandi@gmail.com', 'Nandee', '5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8');
 
 CREATE TABLE IF NOT EXISTS movies (
     movieid int NOT NULL AUTO_INCREMENT,

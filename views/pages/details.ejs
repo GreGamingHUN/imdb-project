@@ -3,10 +3,12 @@
 <head>
     <%- include('../partials/head') %>
     <link rel="stylesheet" href="/css/details.css">
+    <link rel="stylesheet" href="/css/addcast.css">
 </head>
 <body>
     <%- include('../partials/login') %>
     <%- include('../partials/navbar') %>
+    <%- include('../partials/addcast.ejs') %>
     <% let director = []; %> 
     <% cast.forEach(element => {
         if (element.person_role === "director") {
@@ -42,15 +44,20 @@
                                 </tr>
                             <% } %>
                             <% if (movie.movie_studio) { %>
-                            <tr>
-                                <td>
-                                    <span style="color: rgb(177, 177, 177);">Stúdió:</span>
-                                </td>
-                                <td>
+                                <tr>
+                                    <td>
+                                        <span style="color: rgb(177, 177, 177);">Stúdió:</span>
+                                    </td>
+                                    <td>
                                         <span style="margin-left: 25px;"><%- movie.movie_studio %></span>
                                     </td>
-                                </tr>
+                                </tr>   
                             <% } %> 
+                            <% if (localStorage.getItem("loggedin") == "true") { %>
+                                <form action="editmovie" method="post">
+                                    <button class="edit-button" type="submit" name="movieid" value="<%- movie.movieid %> ">Szerkesztés</button>
+                                </form>
+                            <% } %>
                         </table>
                     </div>
                 </div>
@@ -75,6 +82,15 @@
                         </div>
                      <% } %>
                     <% }) %>
+                    <div class="actor-container">
+                        <div class="actor-img">
+                            <button onclick="toggleAddCast()" style="background: none; border: none;"><img width="130px" height="130px" src="/img/people/default.jpg" alt=""></button>
+                        </div>
+                        <div class="actor-text">
+                            <span class="name">Új ember hozzáadása</span><br>
+                            <span class="role"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <% if (localStorage.getItem("loggedin") == "true") { %>

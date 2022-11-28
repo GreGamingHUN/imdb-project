@@ -1,0 +1,25 @@
+.editmovie-main-container {
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 65px;
+}
+
+.editmovie-container {
+    width: calc(80% - 90px);
+    height: 450px;
+    padding: 45px;
+    background: rgb(31, 31, 31);
+    border-radius: 25px;
+}
+
+.input-container input {
+    color: black;
+}
+
+.editmovie-container .title {
+    font-size: 56px;
+    font-weight: bold;
+}
