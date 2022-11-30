@@ -16,9 +16,9 @@ app.use(upload());
 
 var connection = mysql.createConnection(
   {
-    host: 'localhost',
-    user: 'root',
-    password: '',
+    host: '192.168.1.163',
+    user: 'imdb_user',
+    password: 'root',
     database: 'imdb'
   }
 )
